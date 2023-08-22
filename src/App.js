@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-concat */
 
 import Input from './components/Input';
 import Button from './components/Button';
@@ -7,7 +8,7 @@ import { useState } from 'react';
 
 const App = () => {
   const [currentNumber, setCurrentNumber] = useState('0');
-  const [firstNumber, setFirstNumber] = useState('')
+  const [firstNumber, setFirstNumber] = useState('0')
   const [operation, setOperation] = useState('')
 
   const handleOnClear = () => {
@@ -23,6 +24,8 @@ const App = () => {
   }
 
   const handleSumNumber = () => {
+    const fnumber = parseFloat(firstNumber)
+    const atualNumber = parseFloat(currentNumber);
 
     if (firstNumber === '0') {
       setFirstNumber(String(currentNumber));
@@ -31,15 +34,29 @@ const App = () => {
 
 
 
-    } else {
+    } else if (firstNumber >= 1) {
+      const sum = parseFloat(fnumber) + parseFloat(atualNumber)
 
-      const sum = Number(firstNumber) + Number(currentNumber);
-      setCurrentNumber(String(sum));
-      setOperation('')
+      if (operation === '+') {
+        setOperation('+')
+        setCurrentNumber('0')
+        setFirstNumber(parseFloat(sum))
 
 
+
+
+        console.log(parseFloat(sum))
+
+      }
     }
+
+
+
   }
+
+
+
+
 
 
   const handleMinusNumber = () => {
