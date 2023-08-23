@@ -10,6 +10,7 @@ const App = () => {
   const [currentNumber, setCurrentNumber] = useState('0');
   const [firstNumber, setFirstNumber] = useState('0')
   const [operation, setOperation] = useState('')
+  const soma = parseFloat(firstNumber) + parseFloat(currentNumber)
 
   const handleOnClear = () => {
     setCurrentNumber('0');
@@ -42,12 +43,10 @@ const App = () => {
         setCurrentNumber('0')
         setFirstNumber(parseFloat(sum))
 
-
-
-
         console.log(parseFloat(sum))
 
       }
+
     }
 
 
@@ -95,36 +94,40 @@ const App = () => {
   return (
     <Container>
       <Content>
-        <Input value={currentNumber} />
+        <Input value={soma} />
         <Row>
-          <Button label="c" onClick={handleOnClear} />
-          <Button label="()" />
-          <Button label="%" />
-          <Button label="/" />
+          <Button label="AC" onClick={handleOnClear} className="textblack" />
+          <Button label="+/-" className="textblack" />
+          <Button label="%" className="textblack" />
+          <Button label="/" className="bckg-orange
+          "/>
         </Row>
         <Row>
           <Button label="7" onClick={() => handleAddNumber('7')} />
           <Button label="8" onClick={() => handleAddNumber('8')} />
           <Button label="9" onClick={() => handleAddNumber('9')} />
-          <Button label="x" />
+          <Button label="x" className="bckg-orange
+          " />
         </Row>
         <Row>
           <Button label="4" onClick={() => handleAddNumber('4')} />
           <Button label="5" onClick={() => handleAddNumber('5')} />
           <Button label="6" onClick={() => handleAddNumber('6')} />
-          <Button label="-" onClick={handleMinusNumber} />
+          <Button label="-" onClick={handleMinusNumber} className="bckg-orange
+          " />
         </Row>
         <Row>
           <Button label="1" onClick={() => handleAddNumber('1')} />
           <Button label="2" onClick={() => handleAddNumber('2')} />
           <Button label="3" onClick={() => handleAddNumber('3')} />
-          <Button label="+" onClick={handleSumNumber} />
+          <Button label="+" onClick={handleSumNumber} className="bckg-orange
+          " />
         </Row>
         <Row>
-          <Button label="." onClick={() => handleAddNumber('.')} />
-          <Button label="0" onClick={() => handleAddNumber('0')} />
+          <Button label="0" onClick={() => handleAddNumber('0')} className="numberZero" />
           <Button label="," onClick={() => handleAddNumber(',')} />
-          <Button label="=" onClick={handleEquals} />
+          <Button label="=" onClick={handleEquals} className="bckg-orange
+          "/>
         </Row>
 
 
