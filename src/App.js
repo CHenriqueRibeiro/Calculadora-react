@@ -10,7 +10,7 @@ const App = () => {
   const [currentNumber, setCurrentNumber] = useState('0');
   const [firstNumber, setFirstNumber] = useState('0')
   const [operation, setOperation] = useState('')
-  const soma = parseFloat(firstNumber) + parseFloat(currentNumber)
+  const calc = `${Number(firstNumber)}` + `${operation}` + `${Number(currentNumber)}`
 
   const handleOnClear = () => {
     setCurrentNumber('0');
@@ -21,29 +21,28 @@ const App = () => {
   }
 
   const handleAddNumber = (num) => {
-    setCurrentNumber(prev => `${prev === '0' ? '' : prev}${num}`);
+    setCurrentNumber(prev => `${prev === '0' ? '' : prev}${num}`)
+
   }
 
   const handleSumNumber = () => {
     const fnumber = parseFloat(firstNumber)
     const atualNumber = parseFloat(currentNumber);
 
-    if (firstNumber === '0') {
+    if (operation !== '+') {
       setFirstNumber(String(currentNumber));
-      setCurrentNumber('0')
+      setCurrentNumber('')
       setOperation('+')
 
-
-
-    } else if (firstNumber >= 1) {
+    } else if (operation === '+') {
       const sum = parseFloat(fnumber) + parseFloat(atualNumber)
 
       if (operation === '+') {
         setOperation('+')
-        setCurrentNumber('0')
+        setCurrentNumber('')
         setFirstNumber(parseFloat(sum))
-
-        console.log(parseFloat(sum))
+        setCurrentNumber((prevatualNumber) => `${prevatualNumber === '+' ? '' : 0}`)
+        return parseFloat(sum)
 
       }
 
@@ -53,30 +52,36 @@ const App = () => {
 
   }
 
-
-
-
-
-
   const handleMinusNumber = () => {
-
-    if (firstNumber === '0') {
-      setFirstNumber(String(currentNumber));
-      setCurrentNumber('0');
+    const fnumber1 = parseFloat(firstNumber)
+    const atualNumber2 = parseFloat(currentNumber);
+    const calMinus = fnumber1 - atualNumber2
+    if (operation !== '-') {
+      setFirstNumber(Number(currentNumber));
+      setCurrentNumber('')
       setOperation('-')
 
-    } else {
-      console.log('minus')
-      const sum = Number(firstNumber) - Number(currentNumber);
-      setCurrentNumber(String(sum));
-      setOperation('')
 
+
+    } else if (calMinus >= 1 || calMinus <= 0) {
+      const minus = parseFloat(fnumber1) - parseFloat(atualNumber2)
+
+      if (operation === '-') {
+        setOperation('-')
+        setCurrentNumber('')
+        setFirstNumber(parseFloat(minus))
+        setCurrentNumber((prevatualNumber) => `${prevatualNumber === '-' ? '' : 0}`)
+        console.log(parseFloat(minus))
+
+      }
 
     }
+
+
+
   }
 
   const handleEquals = () => {
-
     if (firstNumber !== '0' && operation !== '' && currentNumber !== 0) {
       switch (operation) {
         case '+':
@@ -94,7 +99,7 @@ const App = () => {
   return (
     <Container>
       <Content>
-        <Input value={soma} />
+        <Input value={calc} />
         <Row>
           <Button label="AC" onClick={handleOnClear} className="textblack" />
           <Button label="+/-" className="textblack" />
