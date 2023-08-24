@@ -81,6 +81,83 @@ const App = () => {
 
   }
 
+  const handleMultiplicationNumber = () => {
+    const fnumber = parseFloat(firstNumber)
+    const atualNumber = parseFloat(currentNumber);
+    const calMultiplication = firstNumber * atualNumber
+    if (operation !== 'x') {
+      setFirstNumber(String(currentNumber));
+      setCurrentNumber('')
+      setOperation('x')
+
+    } else if (operation === 'x') {
+      const sum = parseFloat(fnumber) * parseFloat(atualNumber)
+
+      if (calMultiplication >= 1) {
+        setOperation('x')
+        setCurrentNumber('')
+        setFirstNumber(parseFloat(sum))
+        setCurrentNumber((prevatualNumber) => `${prevatualNumber === 'x' ? '' : 0}`)
+        return parseFloat(sum)
+
+      }
+
+    }
+
+  }
+
+  const handleDivisionNumber = () => {
+    const fnumber = parseFloat(firstNumber)
+    const atualNumber = parseFloat(currentNumber);
+    const calDivision = firstNumber / atualNumber
+    if (operation !== '/') {
+      setFirstNumber(String(currentNumber));
+      setCurrentNumber('')
+      setOperation('/')
+
+    } else if (operation === '/') {
+      const sum = parseFloat(fnumber) / parseFloat(atualNumber)
+
+      if (calDivision >= 0) {
+        setOperation('/')
+        setCurrentNumber('')
+        setFirstNumber(parseFloat(sum))
+        setCurrentNumber((prevatualNumber) => `${prevatualNumber !== '/' ? '' : 0}`)
+        return parseFloat(sum)
+
+      }
+
+    }
+
+  }
+
+  const handlePercetageNumber = () => {
+    const fnumber = parseFloat(firstNumber)
+    const atualNumber = parseFloat(currentNumber);
+    const calDivision = ((firstNumber * atualNumber) * 0.01)
+    if (operation !== '%') {
+      setFirstNumber(String(currentNumber));
+      setCurrentNumber('')
+      setOperation('%')
+
+    } else if (operation === '%') {
+      const division = parseFloat(fnumber) * parseFloat(atualNumber)
+      const calPercetage = (division * 0.01).toFixed(2)
+
+      if (calDivision >= 0) {
+        setOperation('%')
+        setCurrentNumber('')
+        setFirstNumber(parseFloat(calPercetage))
+
+        return parseFloat(calPercetage)
+
+      }
+
+    }
+
+  }
+
+
   const handleEquals = () => {
     if (firstNumber !== '0' && operation !== '' && currentNumber !== 0) {
       switch (operation) {
@@ -89,6 +166,15 @@ const App = () => {
           break;
         case '-':
           handleMinusNumber()
+          break;
+        case 'x':
+          handleMultiplicationNumber()
+          break;
+        case '/':
+          handleDivisionNumber()
+          break;
+        case '%':
+          handlePercetageNumber()
           break;
         default:
           break;
@@ -103,15 +189,15 @@ const App = () => {
         <Row>
           <Button label="AC" onClick={handleOnClear} className="textblack" />
           <Button label="+/-" className="textblack" />
-          <Button label="%" className="textblack" />
-          <Button label="/" className="bckg-orange
+          <Button label="%" onClick={handlePercetageNumber} className="textblack" />
+          <Button label="/" onClick={handleDivisionNumber} className="bckg-orange
           "/>
         </Row>
         <Row>
           <Button label="7" onClick={() => handleAddNumber('7')} />
           <Button label="8" onClick={() => handleAddNumber('8')} />
           <Button label="9" onClick={() => handleAddNumber('9')} />
-          <Button label="x" className="bckg-orange
+          <Button label="x" onClick={handleMultiplicationNumber} className="bckg-orange
           " />
         </Row>
         <Row>
