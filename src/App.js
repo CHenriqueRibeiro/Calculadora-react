@@ -188,7 +188,7 @@ const App = () => {
         <Input value={calc} />
         <Row>
           <Button label="AC" onClick={handleOnClear} className="textblack" />
-          <Button label="+/-" className="textblack" />
+          <Button label="C" className="textblack" />
           <Button label="%" onClick={handlePercetageNumber} className="textblack" />
           <Button label="/" onClick={handleDivisionNumber} className="bckg-orange
           "/>
