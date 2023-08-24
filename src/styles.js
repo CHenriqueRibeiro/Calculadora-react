@@ -15,7 +15,8 @@ export const Content = styled.div`
 border-radius:15px;
 padding: 15px;
 background-color:#000000;
-width: 450px;
+max-with:300px;
+width: 300px;
 
 
 `
