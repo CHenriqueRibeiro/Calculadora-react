@@ -17,18 +17,17 @@ const App = () => {
   }
 
   const eraseOne = () => {
-    if (currentNumber.length === 1) {
+    console.log(currentNumber.length)
+    if (currentNumber.length == 1 || currentNumber == 0) {
       setCurrentNumber(0)
-
     } else {
-
       setCurrentNumber(String(currentNumber).substring(0, currentNumber.length - 1));
     }
 
   }
 
   const handleAddNumber = (num) => {
-    if (currentNumber === 0 || firstNumber === currentNumber) {
+    if (Number(currentNumber) === 0 || Number(firstNumber) === Number(currentNumber) || firstNumber === '.') {
       setCurrentNumber(num);
       setSecondNumber(num);
     } else {
@@ -45,7 +44,7 @@ const App = () => {
         setFirstNumber(currentNumber);
       }
     } else {
-      if (firstNumber !== currentNumber) {
+      if (firstNumber !== Number(currentNumber)) {
         setCurrentNumber(Number(firstNumber) + Number(secondNumber));
         setFirstNumber(Number(firstNumber) + Number(secondNumber));
       }
@@ -173,7 +172,7 @@ const App = () => {
         </Row>
         <Row>
           <Button label="0" onClick={() => handleAddNumber('0')} className="numberZero" />
-          <Button label="," onClick={() => handleAddNumber(',')} />
+          <Button label="," onClick={() => handleAddNumber('.')} />
           <Button label="=" onClick={handleEquals} className="bckg-orange
           "/>
         </Row>
