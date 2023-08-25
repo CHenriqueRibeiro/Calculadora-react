@@ -7,54 +7,77 @@ import { useState } from 'react';
 
 
 const App = () => {
-  const [currentNumber, setCurrentNumber] = useState('0');
-  const [firstNumber, setFirstNumber] = useState('0')
+  const [currentNumber, setCurrentNumber] = useState(0);
+  const [firstNumber, setFirstNumber] = useState(0)
+  const [secondNumber, setSecondNumber] = useState(0)
   const [operation, setOperation] = useState('')
-  const calc = `${Number(firstNumber)}` + `${operation}` + `${Number(currentNumber)}`
 
   const handleOnClear = () => {
-    setCurrentNumber('0');
-    setFirstNumber('0');
-    setOperation('')
+    setCurrentNumber(0);
+    setFirstNumber(0);
+    setOperation('');
+  }
 
+  const eraseOne = () => {
+    if (currentNumber.length === 1) {
+      setCurrentNumber(0)
+    } else {
+      setCurrentNumber(String(currentNumber).substring(0, currentNumber.length - 1));
+    }
 
   }
 
+
   const handleAddNumber = (num) => {
-    setCurrentNumber(prev => `${prev === '0' ? '' : prev}${num}`)
+    //setCurrentNumber(prev => `${prev === '0' ? '' : prev}${num}`)
+    if (currentNumber === 0 || firstNumber === currentNumber) {
+      setCurrentNumber(num);
+      setSecondNumber(num);
+    } else {
+      setCurrentNumber(currentNumber + num);
+      setSecondNumber(currentNumber + num);
+    }
 
   }
 
   const handleSumNumber = () => {
-    const fnumber = parseFloat(firstNumber)
-    const atualNumber = parseFloat(currentNumber);
+    //const fnumber = Number(firstNumber);
+    //const atualNumber = Number(currentNumber);
 
-    if (operation !== '+') {
+    if (firstNumber === 0) {
+      if (currentNumber !== 0) {
+        setOperation('+');
+        setFirstNumber(currentNumber);
+      }
+    } else {
+      if (firstNumber !== currentNumber) {
+        setCurrentNumber(Number(firstNumber) + Number(secondNumber));
+        setFirstNumber(Number(firstNumber) + Number(secondNumber));
+      }
+    }
+
+
+    /*if (operation !== '+') {
       setFirstNumber(String(currentNumber));
       setCurrentNumber('')
       setOperation('+')
 
     } else if (operation === '+') {
-      const sum = parseFloat(fnumber) + parseFloat(atualNumber)
+      const sum = Number(fnumber) + Number(atualNumber)
 
       if (operation === '+') {
         setOperation('+')
         setCurrentNumber('')
-        setFirstNumber(parseFloat(sum))
+        setFirstNumber(Number(sum))
         setCurrentNumber((prevatualNumber) => `${prevatualNumber === '+' ? '' : 0}`)
-        return parseFloat(sum)
-
       }
 
-    }
-
-
-
+  }*/
   }
 
   const handleMinusNumber = () => {
-    const fnumber1 = parseFloat(firstNumber)
-    const atualNumber2 = parseFloat(currentNumber);
+    const fnumber1 = Number(firstNumber)
+    const atualNumber2 = Number(currentNumber);
     const calMinus = fnumber1 - atualNumber2
     if (operation !== '-') {
       setFirstNumber(Number(currentNumber));
@@ -64,14 +87,14 @@ const App = () => {
 
 
     } else if (calMinus >= 1 || calMinus <= 0) {
-      const minus = parseFloat(fnumber1) - parseFloat(atualNumber2)
+      const minus = Number(fnumber1) - Number(atualNumber2)
 
       if (operation === '-') {
         setOperation('-')
         setCurrentNumber('')
-        setFirstNumber(parseFloat(minus))
+        setFirstNumber(Number(minus))
         setCurrentNumber((prevatualNumber) => `${prevatualNumber === '-' ? '' : 0}`)
-        console.log(parseFloat(minus))
+        console.log(Number(minus))
 
       }
 
@@ -82,8 +105,8 @@ const App = () => {
   }
 
   const handleMultiplicationNumber = () => {
-    const fnumber = parseFloat(firstNumber)
-    const atualNumber = parseFloat(currentNumber);
+    const fnumber = Number(firstNumber)
+    const atualNumber = Number(currentNumber);
     const calMultiplication = firstNumber * atualNumber
     if (operation !== 'x') {
       setFirstNumber(String(currentNumber));
@@ -91,14 +114,14 @@ const App = () => {
       setOperation('x')
 
     } else if (operation === 'x') {
-      const sum = parseFloat(fnumber) * parseFloat(atualNumber)
+      const sum = Number(fnumber) * Number(atualNumber)
 
       if (calMultiplication >= 1) {
         setOperation('x')
         setCurrentNumber('')
-        setFirstNumber(parseFloat(sum))
+        setFirstNumber(Number(sum))
         setCurrentNumber((prevatualNumber) => `${prevatualNumber === 'x' ? '' : 0}`)
-        return parseFloat(sum)
+        return Number(sum)
 
       }
 
@@ -107,8 +130,8 @@ const App = () => {
   }
 
   const handleDivisionNumber = () => {
-    const fnumber = parseFloat(firstNumber)
-    const atualNumber = parseFloat(currentNumber);
+    const fnumber = Number(firstNumber)
+    const atualNumber = Number(currentNumber);
     const calDivision = firstNumber / atualNumber
     if (operation !== '/') {
       setFirstNumber(String(currentNumber));
@@ -116,14 +139,14 @@ const App = () => {
       setOperation('/')
 
     } else if (operation === '/') {
-      const sum = parseFloat(fnumber) / parseFloat(atualNumber)
+      const sum = Number(fnumber) / Number(atualNumber)
 
       if (calDivision >= 0) {
         setOperation('/')
         setCurrentNumber('')
-        setFirstNumber(parseFloat(sum))
+        setFirstNumber(Number(sum))
         setCurrentNumber((prevatualNumber) => `${prevatualNumber !== '/' ? '' : 0}`)
-        return parseFloat(sum)
+        return Number(sum)
 
       }
 
@@ -132,8 +155,8 @@ const App = () => {
   }
 
   const handlePercetageNumber = () => {
-    const fnumber = parseFloat(firstNumber)
-    const atualNumber = parseFloat(currentNumber);
+    const fnumber = Number(firstNumber)
+    const atualNumber = Number(currentNumber);
     const calDivision = ((firstNumber * atualNumber) * 0.01)
     if (operation !== '%') {
       setFirstNumber(String(currentNumber));
@@ -141,15 +164,15 @@ const App = () => {
       setOperation('%')
 
     } else if (operation === '%') {
-      const division = parseFloat(fnumber) * parseFloat(atualNumber)
+      const division = Number(fnumber) * Number(atualNumber)
       const calPercetage = (division * 0.01).toFixed(2)
 
       if (calDivision >= 0) {
         setOperation('%')
         setCurrentNumber('')
-        setFirstNumber(parseFloat(calPercetage))
+        setFirstNumber(Number(calPercetage))
 
-        return parseFloat(calPercetage)
+        return Number(calPercetage)
 
       }
 
@@ -159,10 +182,12 @@ const App = () => {
 
 
   const handleEquals = () => {
-    if (firstNumber !== '0' && operation !== '' && currentNumber !== 0) {
+    console.log(`${Number(firstNumber)} + ${Number(secondNumber)}`);
+    if (firstNumber !== 0 && operation !== '' && currentNumber !== 0) {
       switch (operation) {
         case '+':
-          handleSumNumber()
+          setCurrentNumber(Number(firstNumber) + Number(secondNumber));
+          setFirstNumber(Number(firstNumber) + Number(secondNumber));
           break;
         case '-':
           handleMinusNumber()
@@ -185,10 +210,10 @@ const App = () => {
   return (
     <Container>
       <Content>
-        <Input value={calc} />
+        <Input value={currentNumber} />
         <Row>
           <Button label="AC" onClick={handleOnClear} className="textblack" />
-          <Button label="C" className="textblack" />
+          <Button label="C" onClick={eraseOne} className="textblack" />
           <Button label="%" onClick={handlePercetageNumber} className="textblack" />
           <Button label="/" onClick={handleDivisionNumber} className="bckg-orange
           "/>
