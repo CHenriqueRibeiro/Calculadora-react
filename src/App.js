@@ -1,5 +1,3 @@
-/* eslint-disable no-useless-concat */
-
 import Input from './components/Input';
 import Button from './components/Button';
 import { Container, Content, Row } from './styles';
@@ -21,15 +19,15 @@ const App = () => {
   const eraseOne = () => {
     if (currentNumber.length === 1) {
       setCurrentNumber(0)
+
     } else {
+
       setCurrentNumber(String(currentNumber).substring(0, currentNumber.length - 1));
     }
 
   }
 
-
   const handleAddNumber = (num) => {
-    //setCurrentNumber(prev => `${prev === '0' ? '' : prev}${num}`)
     if (currentNumber === 0 || firstNumber === currentNumber) {
       setCurrentNumber(num);
       setSecondNumber(num);
@@ -41,9 +39,6 @@ const App = () => {
   }
 
   const handleSumNumber = () => {
-    //const fnumber = Number(firstNumber);
-    //const atualNumber = Number(currentNumber);
-
     if (firstNumber === 0) {
       if (currentNumber !== 0) {
         setOperation('+');
@@ -55,134 +50,67 @@ const App = () => {
         setFirstNumber(Number(firstNumber) + Number(secondNumber));
       }
     }
-
-
-    /*if (operation !== '+') {
-      setFirstNumber(String(currentNumber));
-      setCurrentNumber('')
-      setOperation('+')
-
-    } else if (operation === '+') {
-      const sum = Number(fnumber) + Number(atualNumber)
-
-      if (operation === '+') {
-        setOperation('+')
-        setCurrentNumber('')
-        setFirstNumber(Number(sum))
-        setCurrentNumber((prevatualNumber) => `${prevatualNumber === '+' ? '' : 0}`)
-      }
-
-  }*/
   }
 
   const handleMinusNumber = () => {
-    const fnumber1 = Number(firstNumber)
-    const atualNumber2 = Number(currentNumber);
-    const calMinus = fnumber1 - atualNumber2
-    if (operation !== '-') {
-      setFirstNumber(Number(currentNumber));
-      setCurrentNumber('')
-      setOperation('-')
-
-
-
-    } else if (calMinus >= 1 || calMinus <= 0) {
-      const minus = Number(fnumber1) - Number(atualNumber2)
-
-      if (operation === '-') {
-        setOperation('-')
-        setCurrentNumber('')
-        setFirstNumber(Number(minus))
-        setCurrentNumber((prevatualNumber) => `${prevatualNumber === '-' ? '' : 0}`)
-        console.log(Number(minus))
-
+    if (firstNumber === 0) {
+      if (currentNumber !== 0) {
+        setOperation('-');
+        setFirstNumber(currentNumber);
       }
-
+    } else {
+      if (firstNumber !== currentNumber) {
+        setCurrentNumber(Number(firstNumber) - Number(secondNumber));
+        setFirstNumber(Number(firstNumber) - Number(secondNumber));
+      }
     }
-
-
-
   }
 
   const handleMultiplicationNumber = () => {
-    const fnumber = Number(firstNumber)
-    const atualNumber = Number(currentNumber);
-    const calMultiplication = firstNumber * atualNumber
-    if (operation !== 'x') {
-      setFirstNumber(String(currentNumber));
-      setCurrentNumber('')
-      setOperation('x')
-
-    } else if (operation === 'x') {
-      const sum = Number(fnumber) * Number(atualNumber)
-
-      if (calMultiplication >= 1) {
-        setOperation('x')
-        setCurrentNumber('')
-        setFirstNumber(Number(sum))
-        setCurrentNumber((prevatualNumber) => `${prevatualNumber === 'x' ? '' : 0}`)
-        return Number(sum)
-
+    if (firstNumber === 0) {
+      if (currentNumber !== 0) {
+        setOperation('x');
+        setFirstNumber(currentNumber);
       }
-
+    } else {
+      if (firstNumber !== currentNumber) {
+        setCurrentNumber(Number(firstNumber) * Number(secondNumber));
+        setFirstNumber(Number(firstNumber) * Number(secondNumber));
+      }
     }
-
   }
 
   const handleDivisionNumber = () => {
-    const fnumber = Number(firstNumber)
-    const atualNumber = Number(currentNumber);
-    const calDivision = firstNumber / atualNumber
-    if (operation !== '/') {
-      setFirstNumber(String(currentNumber));
-      setCurrentNumber('')
-      setOperation('/')
-
-    } else if (operation === '/') {
-      const sum = Number(fnumber) / Number(atualNumber)
-
-      if (calDivision >= 0) {
-        setOperation('/')
-        setCurrentNumber('')
-        setFirstNumber(Number(sum))
-        setCurrentNumber((prevatualNumber) => `${prevatualNumber !== '/' ? '' : 0}`)
-        return Number(sum)
-
+    if (firstNumber === 0) {
+      if (currentNumber !== 0) {
+        setOperation('/');
+        setFirstNumber(currentNumber);
       }
-
+    } else {
+      if (firstNumber !== currentNumber) {
+        setCurrentNumber(Number(firstNumber) / Number(secondNumber));
+        setFirstNumber(Number(firstNumber) / Number(secondNumber));
+      }
     }
-
   }
 
   const handlePercetageNumber = () => {
-    const fnumber = Number(firstNumber)
-    const atualNumber = Number(currentNumber);
-    const calDivision = ((firstNumber * atualNumber) * 0.01)
-    if (operation !== '%') {
-      setFirstNumber(String(currentNumber));
-      setCurrentNumber('')
-      setOperation('%')
-
-    } else if (operation === '%') {
-      const division = Number(fnumber) * Number(atualNumber)
-      const calPercetage = (division * 0.01).toFixed(2)
-
-      if (calDivision >= 0) {
-        setOperation('%')
-        setCurrentNumber('')
-        setFirstNumber(Number(calPercetage))
-
-        return Number(calPercetage)
-
+    if (firstNumber === 0) {
+      if (currentNumber !== 0) {
+        setOperation('%');
+        setFirstNumber(currentNumber);
       }
-
+    } else {
+      if (firstNumber !== currentNumber) {
+        setCurrentNumber((Number(firstNumber) * Number(secondNumber)) * 0.01);
+        setFirstNumber((Number(firstNumber) * Number(secondNumber)) * 0.01);
+      }
     }
-
   }
 
 
   const handleEquals = () => {
-    console.log(`${Number(firstNumber)} + ${Number(secondNumber)}`);
+
     if (firstNumber !== 0 && operation !== '' && currentNumber !== 0) {
       switch (operation) {
         case '+':
@@ -190,16 +118,20 @@ const App = () => {
           setFirstNumber(Number(firstNumber) + Number(secondNumber));
           break;
         case '-':
-          handleMinusNumber()
+          setCurrentNumber(Number(firstNumber) - Number(secondNumber));
+          setFirstNumber(Number(firstNumber) - Number(secondNumber));
           break;
         case 'x':
-          handleMultiplicationNumber()
+          setCurrentNumber(Number(firstNumber) * Number(secondNumber));
+          setFirstNumber(Number(firstNumber) * Number(secondNumber));
           break;
         case '/':
-          handleDivisionNumber()
+          setCurrentNumber(Number(firstNumber) / Number(secondNumber));
+          setFirstNumber(Number(firstNumber) / Number(secondNumber));
           break;
         case '%':
-          handlePercetageNumber()
+          setCurrentNumber((Number(firstNumber) * Number(secondNumber)) * 0.01);
+          setFirstNumber((Number(firstNumber) * Number(secondNumber)) * 0.01);
           break;
         default:
           break;
