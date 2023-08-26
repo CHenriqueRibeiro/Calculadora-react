@@ -28,7 +28,8 @@ const App = () => {
   }
 
   const handleAddNumber = (num) => {
-    if (Number(currentNumber) === 0 || Number(firstNumber) === Number(currentNumber) || firstNumber === '.') {
+
+    if (Number(currentNumber) === 0 || Number(firstNumber) === Number(currentNumber)) {
       setCurrentNumber(num);
       setSecondNumber(num);
     } else {
