@@ -1,3 +1,4 @@
+/* eslint-disable eqeqeq */
 import Input from './components/Input';
 import Button from './components/Button';
 import { Container, Content, Row } from './styles';
@@ -51,7 +52,7 @@ const App = () => {
     }
   }
 
-  const handleMinusNumber = () => {
+  function handleMinusNumber() {
     if (firstNumber === 0) {
       if (currentNumber !== 0) {
         setOperation('-');
