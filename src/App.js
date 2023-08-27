@@ -60,7 +60,7 @@ const App = () => {
         setFirstNumber(currentNumber);
       }
     } else {
-      if (firstNumber !== currentNumber) {
+      if (firstNumber !== Number(currentNumber)) {
         setCurrentNumber(Number(firstNumber) - Number(secondNumber));
         setFirstNumber(Number(firstNumber) - Number(secondNumber));
       }
@@ -74,7 +74,7 @@ const App = () => {
         setFirstNumber(currentNumber);
       }
     } else {
-      if (firstNumber !== currentNumber) {
+      if (firstNumber !== Number(currentNumber)) {
         setCurrentNumber(Number(firstNumber) * Number(secondNumber));
         setFirstNumber(Number(firstNumber) * Number(secondNumber));
       }
@@ -88,7 +88,7 @@ const App = () => {
         setFirstNumber(currentNumber);
       }
     } else {
-      if (firstNumber !== currentNumber) {
+      if (firstNumber !== Number(currentNumber)) {
         setCurrentNumber(Number(firstNumber) / Number(secondNumber));
         setFirstNumber(Number(firstNumber) / Number(secondNumber));
       }
@@ -102,7 +102,7 @@ const App = () => {
         setFirstNumber(currentNumber);
       }
     } else {
-      if (firstNumber !== currentNumber) {
+      if (firstNumber !== Number(currentNumber)) {
         setCurrentNumber((Number(firstNumber) * Number(secondNumber)) * 0.01);
         setFirstNumber((Number(firstNumber) * Number(secondNumber)) * 0.01);
       }
